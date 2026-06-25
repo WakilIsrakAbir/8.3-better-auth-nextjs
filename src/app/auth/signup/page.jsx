@@ -15,20 +15,30 @@ import {
 
 const SignUpPage = () => {
   const onSubmit = (e) => {
-    //     e.preventDefault();
-    //     const formData = new FormData(e.currentTarget);
-    //     const data = {};
-    //     // Convert FormData to plain object
-    //     formData.forEach((value, key) => {
-    //       data[key] = value.toString();
-    //     });
-    //     alert(`Form submitted with: ${JSON.stringify(data, null, 2)}`);
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData.entries());
+    console.log("Form Submitted with:", data);
   };
 
   return (
     <div>
       <p> Please Sign Up</p>
       <Form className="flex w-96 flex-col gap-4" onSubmit={onSubmit}>
+        <TextField
+          isRequired
+          name="name"
+          validate={(value) => {
+            if (value.length < 3) {
+              return "Name must be at least 3 characters";
+            }
+            return null;
+          }}
+        >
+          <Label>Name</Label>
+          <Input name="name" placeholder="Your name" />
+          <FieldError />
+        </TextField>
         <TextField
           isRequired
           name="email"
@@ -41,7 +51,7 @@ const SignUpPage = () => {
           }}
         >
           <Label>Email</Label>
-          <Input placeholder="john@example.com" />
+          <Input name="email" placeholder="Your Email Address" />
           <FieldError />
         </TextField>
         <TextField
@@ -63,7 +73,7 @@ const SignUpPage = () => {
           }}
         >
           <Label>Password</Label>
-          <Input placeholder="Enter your password" />
+          <Input name="password" placeholder="Enter your password" />
           <Description>
             Must be at least 8 characters with 1 uppercase and 1 number
           </Description>
