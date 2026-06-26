@@ -23,7 +23,7 @@ const SignInPage = () => {
       email: userData.email,
       password: userData.password,
       rememberMe: true,
-      callbackURL: "/",
+      callbackURL: "/dashboard",
     });
 
     console.log("Sign In Response:", { data, error });
@@ -38,7 +38,7 @@ const SignInPage = () => {
   };
 
   return (
-    <div>
+    <div className="flex items-center flex-col gap-4 mt-5">
       <h1>Please SignIn</h1>
       <Form className="flex w-96 flex-col gap-4" onSubmit={onSubmit}>
         <TextField
